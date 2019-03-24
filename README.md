@@ -1,5 +1,7 @@
 # chudinanton_infra
-##ДЗ№4
+
+## ДЗ№4
+### Адрес приложения
 
 <pre>
 testapp_IP = 35.246.208.130
@@ -54,7 +56,7 @@ gcloud compute firewall-rules create default-puma-service \
 </pre>
 
 
-##ДЗ№3
+## ДЗ№3
 
 Подключение к someinternalhost одной командой:
 ssh -t -i ~/.ssh/id_rsa -A chudinanton@35.246.131.118 ssh 10.156.0.4
