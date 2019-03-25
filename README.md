@@ -1,5 +1,63 @@
 # chudinanton_infra
 
+## ДЗ№4
+### Адрес приложения
+
+<pre>
+testapp_IP = 35.246.208.130
+
+testapp_port = 9292
+</pre>
+
+## Команды gcloud:
+### Создание ВМ через startup_script.sh
+
+<pre>
+
+gcloud compute instances create reddit-app\
+  --boot-disk-size=10GB \
+  --image-family ubuntu-1604-lts \
+  --image-project=ubuntu-os-cloud \
+  --machine-type=g1-small \
+  --tags puma-server \
+  --restart-on-failure \
+  --metadata-from-file startup-script=./startup_script.sh
+
+</pre>
+
+### Создание ВМ через --metadata startup-script-url
+
+<pre>
+
+gcloud compute instances create reddit-app\
+  --boot-disk-size=10GB \
+  --image-family ubuntu-1604-lts \
+  --image-project=ubuntu-os-cloud \
+  --machine-type=g1-small \
+  --tags puma-server \
+  --restart-on-failure \
+  --metadata startup-script-url=gs://chudinanton-test/startup_script.sh
+
+</pre>
+
+### Создание правила в firewall через gcloud
+
+<pre>
+
+gcloud compute firewall-rules create default-puma-service \
+  --network default \
+  --action allow \
+  --direction ingress \
+  --rules tcp:9292 \
+  --source-ranges 0.0.0.0/0 \
+  --priority 1000 \
+  --target-tags puma-server
+
+</pre>
+
+
+## ДЗ№3
+
 Подключение к someinternalhost одной командой:
 ssh -t -i ~/.ssh/id_rsa -A chudinanton@35.246.131.118 ssh 10.156.0.4
 
@@ -8,6 +66,7 @@ ssh -t -i ~/.ssh/id_rsa -A chudinanton@35.246.131.118 ssh 10.156.0.4
 
 
 Вариант A:
+
 Внести в ~/.ssh/config следующие настройки:
 
 
@@ -50,7 +109,8 @@ Host someinternalhost 10.156.0.4
 
 После этого можно подключаться к bastion и someinternalhost через команду ssh someinternalhost
 
-
+<pre>
 bastion_IP = 35.246.131.118
 
 someinternalhost_IP = 10.156.0.4
+</pre>
