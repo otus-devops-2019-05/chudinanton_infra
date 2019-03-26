@@ -10,7 +10,7 @@
             "ssh_username": "chudinanton",
             "machine_type": "f1-micro"
         }
-    ]
+    ],
     "provisioners": [
         {
             "type": "shell",
