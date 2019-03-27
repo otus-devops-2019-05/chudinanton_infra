@@ -1,0 +1,16 @@
+[Unit]
+Description=Reddit-app
+After=mongod.service
+After=network.target
+Requires=mongod.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/puma
+WorkingDirectory=/home/chudinanton/reddit
+User=chudinanton
+Group=chudinanton
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
