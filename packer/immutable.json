@@ -1,3 +1,4 @@
+{
     "builders": [
         {
             "type": "googlecompute",
@@ -20,7 +21,7 @@
         {
             "type": "file",
             "source": "files/reddit.service",
-            "destination": "/etc/systemd/system/reddit.service"
+            "destination": "/home/chudinanton/reddit.service"
         },
         {
             "type": "shell",
