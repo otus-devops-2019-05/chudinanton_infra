@@ -1,4 +1,19 @@
 # chudinanton_infra
+## ДЗ№6
+## Сделано:
+ - Выполнено основное задание. С помощью terraform развернуто приложение с открытие портов и параметризацией.
+ - Выполнено дополнительное задание №1 по добавлению пользователей.
+Пример:
+
+<pre>
+resource "google_compute_project_metadata" "default" {
+  metadata = {
+    ssh-keys = "appuser1:${file(var.public_key_path_appuser1)}\nappuser2:${file(var.public_key_path_appuser2)}\nappuser3:${file(var.public_key_path_appuser3)}"
+  }
+}
+</pre>
+
+Нужено учитывать, что если создать пользователя через UI, то они удаляться после применения конфигурации  terraform apply -auto-approve=true
 
 ## ДЗ№5
 ## Сделано:
