@@ -11,3 +11,26 @@ provider "google" {
 
     region = "europe-west3-a"
 }
+
+resource "google_compute_instance" "app" {
+  name         = "reddit-app"
+  machine_type = "g1-small"
+  zone         = "europe-west3-a"
+
+  boot_disk {
+    initialize_params {
+      image = "reddit-base"
+    }
+  }
+
+  metadata {
+      # путьдопубличногоключа
+      ssh-keys = "chudinanton:${file("~/.ssh/id_rsa.pub")}"
+  }
+
+  network_interface {
+    network = "default"
+
+    access_config {}
+  }
+}
