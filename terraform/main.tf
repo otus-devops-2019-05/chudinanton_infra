@@ -1,22 +1,22 @@
 terraform {
-      # Версия terraform
-      required_version = "0.11.13"
-      }
+  # Версия terraform
+  required_version = "0.11.13"
+}
 
 provider "google" {
-    # Версияпровайдера
-    version = "2.0.0"
-    # ID проекта
-    project = "${var.project}"
-    region = "${var.region}"
+  # Версия провайдера
+  version = "2.0.0"
 
+  # ID проекта
+  project = "${var.project}"
+  region  = "${var.region}"
 }
 
 resource "google_compute_instance" "app" {
   name         = "reddit-app"
   machine_type = "g1-small"
-  zone         = "europe-west3-a"
-  tags = ["reddit-app"]
+  zone         = "${var.zone}"
+  tags         = ["reddit-app"]
 
   boot_disk {
     initialize_params {
@@ -25,8 +25,8 @@ resource "google_compute_instance" "app" {
   }
 
   metadata {
-      # путьдопубличногоключа
-      ssh-keys = "appuser:${file(var.public_key_path)}"
+    # путь до публичного ключа
+    ssh-keys = "appuser:${file(var.public_key_path)}"
   }
 
   network_interface {
@@ -42,17 +42,16 @@ resource "google_compute_instance" "app" {
 
     # путь до приватного ключа
     private_key = "${file("~/.ssh/appuser")}"
-}
+  }
 
- provisioner "file" {
+  provisioner "file" {
     source      = "files/puma.service"
     destination = "/tmp/puma.service"
- }
+  }
 
   provisioner "remote-exec" {
     script = "files/deploy.sh"
- }
-
+  }
 }
 
 resource "google_compute_firewall" "firewall_puma" {
@@ -72,4 +71,9 @@ resource "google_compute_firewall" "firewall_puma" {
 
   # Правило применимо для инстансов с перечисленными тэгами
   target_tags = ["reddit-app"]
+}
+
+resource "google_compute_project_metadata_item" "default" {
+  key   = "ssh-metadata"
+  value = "appuser1:${file(var.public_key_path_appuser1)}appuser2:${file(var.public_key_path_appuser2)}appuser3:${file(var.public_key_path_appuser3)}"
 }
