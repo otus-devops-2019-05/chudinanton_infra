@@ -7,8 +7,8 @@ provider "google" {
     # Версияпровайдера
     version = "2.0.0"
     # ID проекта
-    project = "infra-234921"
-    region = "europe-west3-a"
+    project = "${var.project}"
+    region = "${var.region}"
 
 }
 
@@ -20,13 +20,13 @@ resource "google_compute_instance" "app" {
 
   boot_disk {
     initialize_params {
-      image = "reddit-base"
+      image = "${var.disk_image}"
     }
   }
 
   metadata {
       # путьдопубличногоключа
-      ssh-keys = "chudinanton:${file("~/.ssh/id_rsa.pub")}"
+      ssh-keys = "appuser:${file(var.public_key_path)}"
   }
 
   network_interface {
@@ -37,11 +37,11 @@ resource "google_compute_instance" "app" {
 
   connection {
     type  = "ssh"
-    user  = "chudinanton"
+    user  = "appuser"
     agent = false
 
     # путь до приватного ключа
-    private_key = "${file("~/.ssh/id_rsa.pub")}"
+    private_key = "${file("~/.ssh/appuser")}"
 }
 
  provisioner "file" {
