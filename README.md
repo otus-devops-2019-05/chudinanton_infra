@@ -15,6 +15,12 @@ resource "google_compute_project_metadata" "default" {
 
 Нужено учитывать, что если создать пользователя через UI, то они удаляться после применения конфигурации  terraform apply -auto-approve=true
 
+Ссылка на документацию:
+
+https://www.terraform.io/docs/providers/google/r/compute_project_metadata.html
+
+
+
 ## ДЗ№5
 ## Сделано:
  - Создан образ reddit-base. Протестировано создание ВМ из него и работоспособность приложения reddit-app.
