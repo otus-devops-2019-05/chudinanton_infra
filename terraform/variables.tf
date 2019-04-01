@@ -39,3 +39,7 @@ variable public_key_path_appuser2 {
 variable public_key_path_appuser3 {
   description = "Path to the public key used for ssh access appuser3"
 }
+variable count {
+  description = "count instances"
+}
+
