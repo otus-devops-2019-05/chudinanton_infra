@@ -10,7 +10,7 @@ resource "google_compute_target_pool" "reddit_app_pool" {
   name = "reddit-app"
 
   instances = [
-    "europe-west3-a/reddit-app",
+    "${var.zone}/reddit-app",
   ]
 
   health_checks = [
