@@ -12,6 +12,12 @@ provider "google" {
   region  = "${var.region}"
 }
 
+resource "google_compute_project_metadata" "default" {
+  metadata = {
+    ssh-keys = "appuser1:${file(var.public_key_path_appuser1)}\nappuser2:${file(var.public_key_path_appuser2)}\nappuser3:${file(var.public_key_path_appuser3)}"
+  }
+}
+
 resource "google_compute_instance" "app" {
   name         = "reddit-app"
   machine_type = "g1-small"
@@ -71,9 +77,4 @@ resource "google_compute_firewall" "firewall_puma" {
 
   # Правило применимо для инстансов с перечисленными тэгами
   target_tags = ["reddit-app"]
-}
-
-resource "google_compute_project_metadata_item" "default" {
-  key   = "ssh-metadata"
-  value = "appuser1:${file(var.public_key_path_appuser1)}appuser2:${file(var.public_key_path_appuser2)}appuser3:${file(var.public_key_path_appuser3)}"
 }
