@@ -8,14 +8,15 @@ provider "google" {
     version = "2.0.0"
     # ID проекта
     project = "infra-234921"
-
     region = "europe-west3-a"
+
 }
 
 resource "google_compute_instance" "app" {
   name         = "reddit-app"
   machine_type = "g1-small"
   zone         = "europe-west3-a"
+  tags = ["reddit-app"]
 
   boot_disk {
     initialize_params {
@@ -33,4 +34,30 @@ resource "google_compute_instance" "app" {
 
     access_config {}
   }
+
+ provisioner "file" {
+    source      = "files/puma.service"
+    destination = "/tmp/puma.service"
+
+}
+
+}
+
+resource "google_compute_firewall" "firewall_puma" {
+  name = "allow-puma-default"
+
+  # Название сети, в которой действует правило
+  network = "default"
+
+  # Какой доступ разрешить
+  allow {
+    protocol = "tcp"
+    ports    = ["9292"]
+  }
+
+  # Каким адресам разрешаем доступ
+  source_ranges = ["0.0.0.0/0"]
+
+  # Правило применимо для инстансов с перечисленными тэгами
+  target_tags = ["reddit-app"]
 }
