@@ -41,5 +41,5 @@ variable public_key_path_appuser3 {
 }
 variable count {
   description = "count instances"
+  default     = "1"
 }
-

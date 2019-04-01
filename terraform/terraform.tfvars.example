@@ -6,3 +6,4 @@ zone = "europe-west3-a"
 public_key_path_appuser1 = "~/.ssh/appuser1.pub"
 public_key_path_appuser2 = "~/.ssh/appuser2.pub"
 public_key_path_appuser3 = "~/.ssh/appuser3.pub"
+count = 2
