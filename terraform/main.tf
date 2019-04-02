@@ -88,4 +88,8 @@ resource "google_compute_firewall" "firewall_ssh" {
     ports = ["22"]  
     }  
   source_ranges = ["0.0.0.0/0"]
-  }
+}
+
+resource "google_compute_address" "app_ip" {  
+  name = "reddit-app-ip"
+}
