@@ -1,4 +1,4 @@
-resource "google_compute_address" "app_ip" {  
+resource "google_compute_address" "app_ip" {
   name = "reddit-app-ip"
 }
 
@@ -46,7 +46,7 @@ resource "google_compute_instance" "app" {
   }
 
   provisioner "file" {
-    content = "${data.template_file.gen.rendered}"
+    content     = "${data.template_file.gen.rendered}"
     destination = "/tmp/puma.service"
   }
 
@@ -54,7 +54,6 @@ resource "google_compute_instance" "app" {
     script = "${path.module}/files/deploy.sh"
   }
 }
-
 
 resource "google_compute_firewall" "firewall_puma" {
   name = "allow-puma-default"

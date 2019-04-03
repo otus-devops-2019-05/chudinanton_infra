@@ -12,13 +12,15 @@ variable zone {
   description = "Zone"
   default     = "*"
 }
+
 variable count {
   description = "count instances"
   default     = "1"
 }
-variable app_disk_image {  
-  description = "Disk image for reddit app"  
-  default = "reddit-app-base"
+
+variable app_disk_image {
+  description = "Disk image for reddit app"
+  default     = "reddit-app-base"
 }
 
 variable "mongodb_ip" {
