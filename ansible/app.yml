@@ -2,8 +2,8 @@
 - name: Configure App
   hosts: app
   become: true
-  vars: "{{ hostvars[groups['reddit-db'][0]]['networkInterfaces'][0]['networkIP'] }} "
-   db_host: reddit-db
+  vars:
+   db_host: "{{ hostvars[groups['db'][0]]['networkInterfaces'][0]['networkIP'] }}"
   tasks:
     - name: Add unit file for Puma
       copy:

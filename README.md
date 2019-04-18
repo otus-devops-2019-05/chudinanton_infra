@@ -1,4 +1,32 @@
 # chudinanton_infra
+## ДЗ№9
+## В процессе сделано:
+ - Основное задание: Один playbook,один сценарий; Настройка инстанса приложения; Деплой; Один плейбук,несколько сценариев; 
+<pre>
+Основная проблема: 
+с ростом числа управляемых сервисов,будет расти количество различных сценариев и,как результат, увеличится объем плейбука. Это приведет к тому, что в плейбуке,будет сложно разобраться. <b>Поэтому логично раделять большой проект на несколько плейбуков.</b>
+</pre>
+ - Основное задание: Несколько плейбуков.
+- Задание cо ⭐: Использовал штатный плагиг <b>gcp_compute</b> для динамиского инвентори.
+
+### Полезные ссылки для настройки динамического инвентори:
+https://medium.com/@Temikus/ansible-gcp-dynamic-inventory-2-0-7f3531b28434
+https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html#gce-dynamic-inventory
+https://github.com/ansible/ansible/issues/44404
+
+- Провижининг в Packer.
+<pre>
+Запуск Packer из корня репозитория:
+packer validate  -var-file packer/variables.json packer/db.json
+packer validate  -var-file packer/variables.json packer/app.json
+packer build  -var-file packer/variables.json packer/db.json
+packer build  -var-file packer/variables.json packer/app.json
+</pre>
+
+### Все модули (удобно побирать по нужную систему):
+https://docs.ansible.com/ansible/latest/modules/list_of_all_modules.html
+
+
 ## ДЗ№8
 ## В процессе сделано:
  - Настроен Ansible: добавлен inventory, ansible.cfg, inventory.yml.
