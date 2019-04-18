@@ -1,0 +1,9 @@
+---
+plugin: gcp_compute
+projects:
+  - infra-234921
+zones:
+  - "europe-west3-a"
+filters: []
+auth_kind: serviceaccount
+service_account_file: "../Infra-40b905733b2b.json"
