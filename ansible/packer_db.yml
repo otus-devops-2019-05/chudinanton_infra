@@ -25,4 +25,5 @@
   - name: Configure service supervisor
     systemd:
       name: mongod
-enabled: yes
+      enabled: yes
+
