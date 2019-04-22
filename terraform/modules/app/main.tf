@@ -64,7 +64,7 @@ resource "google_compute_firewall" "firewall_puma" {
   # Какой доступ разрешить
   allow {
     protocol = "tcp"
-    ports    = ["9292"]
+    ports    = ["9293"]
   }
 
   # Каким адресам разрешаем доступ
