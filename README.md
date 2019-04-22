@@ -1,4 +1,37 @@
 # chudinanton_infra
+## ДЗ№10
+## В процессе сделано:
+ - Плейбуки перенесены в роли.
+ - Создано два окружения.
+ - Сделана уборка в папке ansible.
+ - Добавлена коммьюнити роль nginx.
+ - Описано открытие 80-го порта для reddit-app в terraform.
+ - Созданы пользователи на инстансах с использованием Ansible Vault и ключем шифрования который хранится вне репозитория
+<pre>
+Путь к ключу: ~/.ansible/vault.key
+Шифруем файл:
+ansible-vault encrypt environments/stage/credentials.yml
+
+Расшифровываем файл:
+ansible-vault decrypt <file>
+
+Редактируем зашифрованный файл:
+ansible-vault edit <file>
+
+Запуск плейбука с использованием Vault файла:
+ansible-playbook playbooks/site.yml --ask-vault-pass
+
+Документация:
+https://docs.ansible.com/ansible/latest/modules/user_module.html
+
+https://docs.ansible.com/ansible/devel/user_guide/vault.html
+</pre>
+
+### Дополнительное задание:
+- В обоих окружениях настроены динамические инвентори, внутренний ip монги не требуется вбивать руками.
+
+
+
 ## ДЗ№9
 ## В процессе сделано:
  - Основное задание: Один playbook,один сценарий; Настройка инстанса приложения; Деплой; Один плейбук,несколько сценариев; 
@@ -11,7 +44,9 @@
 
 ### Полезные ссылки для настройки динамического инвентори:
 https://medium.com/@Temikus/ansible-gcp-dynamic-inventory-2-0-7f3531b28434
+
 https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html#gce-dynamic-inventory
+
 https://github.com/ansible/ansible/issues/44404
 
 - Провижининг в Packer.
