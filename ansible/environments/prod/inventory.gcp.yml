@@ -1,0 +1,14 @@
+plugin: gcp_compute
+zones: # populate inventory with instances in these regions
+  - europe-west3-a
+projects:
+  - infra-234921
+filters: []
+scopes:
+  - https://www.googleapis.com/auth/compute
+auth_kind: serviceaccount
+service_account_file: "../Infra-40b905733b2b.json"
+groups:
+  app: "'reddit-app' in name"
+  db: "'reddit-db' in name"
+
