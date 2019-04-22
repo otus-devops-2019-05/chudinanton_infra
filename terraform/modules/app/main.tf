@@ -36,14 +36,14 @@ resource "google_compute_instance" "app" {
     }
   }
 
-  connection {
-    type  = "ssh"
-    user  = "appuser"
-    agent = false
+  #connection {
+  #    type  = "ssh"
+  #    user  = "appuser"
+  #    agent = false
 
-    # путь до приватного ключа
-    private_key = "${file(var.private_key_path)}"
-  }
+  # путь до приватного ключа
+  #    private_key = "${file(var.private_key_path)}"
+  #  }
 
   #provisioner "file" {
   #  content     = "${data.template_file.gen.rendered}"
@@ -64,7 +64,7 @@ resource "google_compute_firewall" "firewall_puma" {
   # Какой доступ разрешить
   allow {
     protocol = "tcp"
-    ports    = ["9292"]
+    ports    = ["9292", "80"]
   }
 
   # Каким адресам разрешаем доступ

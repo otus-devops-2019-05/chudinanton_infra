@@ -7,4 +7,5 @@ variables.json
 terraform/.terraform.tfstate.lock.info
 *.retry
 Infra-40b905733b2b.json
+jdauphant.nginx
 
