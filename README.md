@@ -81,7 +81,12 @@ https://habr.com/ru/post/437216/
 На всякий случай развернул stage окружение из этих образов и применил 
 ansible-playbook playbooks/site.yml --ask-vault-pass
 </pre>
-
+- Дополнительное задание: Создан новый репозиторий для db роли. Роль подключена к обоим окружениям через requirements.yml и скачана в основной репозиторий. Теперь можно версионировать роль.
+<pre>
+ - src: https://github.com/chudinanton/mongo-db.git
+   version: v.1.1
+   name: db
+</pre>
 
 
 ## ДЗ№10
