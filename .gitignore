@@ -9,3 +9,11 @@ terraform/.terraform.tfstate.lock.info
 Infra-40b905733b2b.json
 jdauphant.nginx
 
+# Vagrant & molecule
+.vagrant/
+*.log
+*.pyc
+.molecule
+.cache
+.pytest_cache
+

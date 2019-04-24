@@ -1,4 +1,89 @@
 # chudinanton_infra
+## ДЗ№11
+## В процессе сделано:
+ - Установка Vagrant и Virtualbox.
+ - Создан Vagrantfile где описано окружение для тестирование. 
+ - Доработаны роли под возможность локального тестирования.
+ - Использовал "deploy_user" => "vagrant". vagrant destroy -f && vagrant up отрабатывает корректно. Сервис доступен.
+ - Дополнительное задание №1. Переданы переменные для nginx роли. Сервис доступен по 80-му порту.
+<pre>
+        "nginx_sites" => {
+          "default" => [
+             "listen 80", 
+             "server_name 'reddit'", 
+             "location / { proxy_pass http://127.0.0.1:9292; }"
+             ]
+        }
+</pre>
+ - Установлено виртуальное окружение:
+ <pre>
+pip3 install virtualenv
+mkdir ~/python-virtualenv && cd ~/python-virtualenv
+
+Создаем виртуальное окружение в папке ~/python-virtualenv
+virtualenv venv
+
+Применяем виртуальное окружение
+source мenv/bin/activate
+
+Ставим в виртуальное окружение то что нам нужно:
+pip install -r ~/chudinanton_infra/ansible/requirements.txt
+</pre>
+ - Проверена роль DB с помощью Molecule и Testinfra.
+<pre>
+В директории роли db:
+molecule init scenario --scenario-name default -r db -d vagrant
+
+Тесты лежат в виде Python файла здесь:
+~/chudinanton_infra/ansible/roles/db/molecule/default/tests/test_default.py
+
+Создание ВМ в молекуле:
+molecule create
+
+Список созданных инстансов:
+molecule list 
+
+Войти по ssh например для траблшутинга
+molecule login -h instance
+
+В prepare.yml в молекуле нужно добавить вниз (иначе монга не будет ставиться):
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+В db/molecule/default/playbook.yml можно например задать переменные
+
+Применим playbook.yml, в котором вызывается наша роль к созданному хосту:
+molecule converge
+
+Прогнать тесты:
+molecule verify
+
+Прибить виртуалку:
+molecule destroy
+</pre>
+
+ - Написан тест для проверки того на чем слушает монга. 
+
+Документация к тесту socket_listening:
+https://testinfra.readthedocs.io/en/latest/modules.html#socket
+
+Полезные ссылки:
+https://habr.com/ru/post/437216/
+
+- Создано два образа с использованием ролей и тегов. Для app - ruby, для db - install.
+<pre>
+Чтобы пакер увидел роли нужно прописать env и можно задавать теги используемые в ролях в json пакера:
+"extra_arguments": ["--tags","ruby"],
+"ansible_env_vars": ["ANSIBLE_ROLES_PATH={{ pwd }}/ansible/roles"]
+
+На всякий случай развернул stage окружение из этих образов и применил 
+ansible-playbook playbooks/site.yml --ask-vault-pass
+</pre>
+
+
+
 ## ДЗ№10
 ## В процессе сделано:
  - Плейбуки перенесены в роли.
