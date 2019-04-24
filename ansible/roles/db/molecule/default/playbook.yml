@@ -2,7 +2,7 @@
 - name: Converge
   become: true
   hosts: all
-  vars:    
+  vars:
     mongo_bind_ip: 0.0.0.0
   roles:
-    - role: db
+    - role: mongo-db

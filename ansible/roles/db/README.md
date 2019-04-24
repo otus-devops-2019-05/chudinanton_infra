@@ -1,6 +1,9 @@
 MongoDB
 =========
 
+[![Build Status](https://travis-ci.com/chudinanton/mongo-db.svg?branch=master)](https://travis-ci.com/chudinanton/mongo-db)
+
+
 MongoDB Role for Express 42 DevOps kurs
 
 Requirements
@@ -17,18 +20,6 @@ Role Variables
 
 mongo_port</br>
 mongo_bind_ip</br>
-
-Dependencies
-------------
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
 
 License
 -------

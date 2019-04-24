@@ -72,7 +72,7 @@ https://testinfra.readthedocs.io/en/latest/modules.html#socket
 Полезные ссылки:
 https://habr.com/ru/post/437216/
 
-- Создано два образа с использованием ролей и тегов. Для app - ruby, для db - install.
+ - Создано два образа с использованием ролей и тегов. Для app - ruby, для db - install.
 <pre>
 Чтобы пакер увидел роли нужно прописать env и можно задавать теги используемые в ролях в json пакера:
 "extra_arguments": ["--tags","ruby"],
@@ -81,12 +81,29 @@ https://habr.com/ru/post/437216/
 На всякий случай развернул stage окружение из этих образов и применил 
 ansible-playbook playbooks/site.yml --ask-vault-pass
 </pre>
-- Дополнительное задание: Создан новый репозиторий для db роли. Роль подключена к обоим окружениям через requirements.yml и скачана в основной репозиторий. Теперь можно версионировать роль.
+ - Дополнительное задание 2: Создан новый репозиторий для db роли. Роль подключена к обоим окружениям через requirements.yml и скачана в основной репозиторий. Теперь можно версионировать роль.
 <pre>
  - src: https://github.com/chudinanton/mongo-db.git
-   version: v.1.1
+   version: v.1.4
    name: db
+
+Ставим роль как и nginx:
+
+ansible-galaxy install -r environments/stage/requirements.yml
 </pre>
+
+ - Доп. задание 2: настроена интеграция с TravisCI. Он в свою очередь подключатся к GCP создает машину, выполняет тесты, удаляет машину.
+
+Проверить можно здесь:
+
+https://travis-ci.com/chudinanton/mongo-db/builds/109492230
+
+Репозиторий лежит здесь:
+
+https://github.com/chudinanton/mongo-db
+
+ - Доп. задание 2: настроено оповещение в слак из нового репозитория с ролью.
+
 
 
 ## ДЗ№10

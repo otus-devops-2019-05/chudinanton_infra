@@ -5,3 +5,9 @@
 .molecule
 .cache
 .pytest_cache
+secrets.tar
+*.log
+*.tar
+*.pub
+credentials.json
+google_compute_engine
