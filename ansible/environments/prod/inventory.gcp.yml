@@ -7,7 +7,7 @@ filters: []
 scopes:
   - https://www.googleapis.com/auth/compute
 auth_kind: serviceaccount
-service_account_file: "../Infra-40b905733b2b.json"
+service_account_file: "../infra-234921-55dcfc734fcc.json"
 groups:
   app: "'reddit-app' in name"
   db: "'reddit-db' in name"

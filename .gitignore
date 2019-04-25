@@ -7,6 +7,7 @@ variables.json
 terraform/.terraform.tfstate.lock.info
 *.retry
 Infra-40b905733b2b.json
+infra-234921-55dcfc734fcc.json
 jdauphant.nginx
 
 # Vagrant & molecule
@@ -16,4 +17,3 @@ jdauphant.nginx
 .molecule
 .cache
 .pytest_cache
-
